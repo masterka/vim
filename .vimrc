@@ -116,7 +116,7 @@ endif
 "set tabstop=4
 " ファイルのタブの幅
 set ts=4 sw=4 sts=0
-"set expandtab
+set expandtab
 " 編集中でのタブの幅
 "set softtabstop=4
 " インデントの幅
@@ -191,7 +191,8 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType c,h :set dictionary+=~/.vim/dict/c.dict
 autocmd FileType cc,cpp,h :set dictionary+=~/.vim/dict/cpp.dict
 autocmd FileType perl,cgi,pl :set dictionary+=~/.vim/dict/perl.dict
-autocmd FileType java :set dictionary+=~/vimfiles/dict/java.dict
+autocmd FileType java :set dictionary+=~/.vim/dict/java.dict
+autocmd FileType ruby :set dictionary+=~/.vim/dict/ruby.dict
 set complete+=k
 
 
