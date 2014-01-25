@@ -179,13 +179,28 @@ set whichwrap=<,>,h,l,[,]
 " 色を変更する
 colorscheme	torte	
 
+
+"---- neobundle
+if has('vim_starting')
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
+    call neobundle#rc(expand('~/.vim/bundle/'))
+endif
+" let NeoBundle manage NeoBundle
+NeoBundleFetch 'Shougo/neobundle.vim'
+" add plugins
+NeoBundle 'tpope/vim-surround.git'
+NeoBundle 'https://github.com/vim-scripts/yanktmp.vim'
+filetype plugin on
+filetype indent on
+NeoBundleCheck
+
+" ----置換----
 "omni変換
 autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
 
 "tabでomni補完
 autocmd FileType c,h :set dictionary+=~/.vim/dict/c.dict
@@ -195,7 +210,7 @@ autocmd FileType java :set dictionary+=~/.vim/dict/java.dict
 autocmd FileType ruby :set dictionary+=~/.vim/dict/ruby.dict
 set complete+=k
 
-
+"-----置換コマンド
 function InsertTabWrapper()
     if pumvisible()
         return "\<c-n>"
