@@ -194,7 +194,6 @@ filetype plugin on
 filetype indent on
 NeoBundleCheck
 
-" ----置換----
 "omni変換
 autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
