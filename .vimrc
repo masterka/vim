@@ -116,7 +116,7 @@ endif
 "set tabstop=4
 " ファイルのタブの幅
 set ts=4 sw=4 sts=0
-"set expandtab
+set expandtab
 " 編集中でのタブの幅
 "set softtabstop=4
 " インデントの幅
@@ -179,6 +179,22 @@ set whichwrap=<,>,h,l,[,]
 " 色を変更する
 colorscheme	torte	
 
+
+"---- neobundle
+if has('vim_starting')
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
+    call neobundle#rc(expand('~/.vim/bundle/'))
+endif
+" let NeoBundle manage NeoBundle
+NeoBundleFetch 'Shougo/neobundle.vim'
+" add plugins
+NeoBundle 'tpope/vim-surround.git'
+NeoBundle 'https://github.com/vim-scripts/yanktmp.vim'
+filetype plugin on
+filetype indent on
+NeoBundleCheck
+
+" ----置換----
 "omni変換
 autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -186,35 +202,47 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-
 "tabでomni補完
 autocmd FileType c,h :set dictionary+=~/.vim/dict/c.dict
 autocmd FileType cc,cpp,h :set dictionary+=~/.vim/dict/cpp.dict
 autocmd FileType perl,cgi,pl :set dictionary+=~/.vim/dict/perl.dict
-autocmd FileType java :set dictionary+=~/vimfiles/dict/java.dict
+autocmd FileType java :set dictionary+=~/.vim/dict/java.dict
+autocmd FileType ruby :set dictionary+=~/.vim/dict/ruby.dict
 set complete+=k
 
-
-function InsertTabWrapper()
-    if pumvisible()
-        return "\<c-n>"
-    endif
+"-----置換コマンド
+function InsertTabWrapper(type)
     let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k\|<\|/'
-        return "\<tab>"
-    elseif exists('&omnifunc') && &omnifunc == ''
-        return "\<c-n>"
+    "omni補完の場合、omini以外にも上下左右の移動もする
+    if a:type=='omni'
+      if pumvisible()
+          return "\<c-n>"
+      endif
+      if !col || getline('.')[col - 1] !~ '\k\|<\|/'
+          return "\<tab>"
+      elseif exists('&omnifunc') && &omnifunc == ''
+          return "\<c-n>"
+      else
+          return "\<c-x>\<c-o>"
+      endif
+    "keywordの場合、該当のとき以外は何もしない
     else
-        return "\<c-x>\<c-o>"
+      if pumvisible() || !col || getline('.')[col - 1] !~ '\k\|<\|/'
+          return ""
+      else
+          return "\<c-x>\<c-p>"
+      endif
     endif
 endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <tab> <c-r>=InsertTabWrapper('omni')<cr><c-r>=InsertTabWrapper('keyword')<cr>
 
 "omni変換時 preview windowsが邪魔なので消す
 set completeopt=longest,menu
 
 
-"yank
+"---vim yank
 map sy :call YanktmpYank()
 map sp :call YanktmpPaste_p()
 map sP :call YanktmpPaste_P()
+
+
