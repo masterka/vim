@@ -188,6 +188,8 @@ endif
 " let NeoBundle manage NeoBundle
 NeoBundleFetch 'Shougo/neobundle.vim'
 " add plugins
+NeoBundle 'tpope/vim-endwise'
+NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'tpope/vim-surround.git'
 NeoBundle 'https://github.com/vim-scripts/yanktmp.vim'
 filetype plugin on
