@@ -247,3 +247,12 @@ map sp :call YanktmpPaste_p()
 map sP :call YanktmpPaste_P()
 
 
+"---java
+"Java言語のハイライト
+let g:java_highlight_all=1
+"デバック文のハイライト
+let g:java_highlight_debug=1
+"余分なスペースをハイライト
+let g:java_space_errors=1
+"メソッド宣言文をハイライト
+let g:java_highlight_functions=1
