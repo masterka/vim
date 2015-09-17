@@ -183,18 +183,19 @@ colorscheme	torte
 "---- neobundle
 if has('vim_starting')
     set runtimepath+=~/.vim/bundle/neobundle.vim/
-    call neobundle#rc(expand('~/.vim/bundle/'))
+    call neobundle#begin(expand('~/.vim/bundle/'))
+    " let NeoBundle manage NeoBundle
+    NeoBundleFetch 'Shougo/neobundle.vim'
+    " add plugins
+    NeoBundle 'tpope/vim-endwise'
+    NeoBundle 'bronson/vim-trailing-whitespace'
+    NeoBundle 'tpope/vim-surround.git'
+    NeoBundle 'https://github.com/vim-scripts/yanktmp.vim'
+    NeoBundleCheck
+    call neobundle#end()
 endif
-" let NeoBundle manage NeoBundle
-NeoBundleFetch 'Shougo/neobundle.vim'
-" add plugins
-NeoBundle 'tpope/vim-endwise'
-NeoBundle 'bronson/vim-trailing-whitespace'
-NeoBundle 'tpope/vim-surround.git'
-NeoBundle 'https://github.com/vim-scripts/yanktmp.vim'
 filetype plugin on
 filetype indent on
-NeoBundleCheck
 
 "omni変換
 autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
@@ -242,10 +243,9 @@ set completeopt=longest,menu
 
 
 "---vim yank
-map sy :call YanktmpYank()
-map sp :call YanktmpPaste_p()
-map sP :call YanktmpPaste_P()
-
+map <silent> sy :call YanktmpYank()<CR>
+map <silent> sp :call YanktmpPaste_p()<CR>
+map <silent> sP :call YanktmpPaste_P()<CR>
 
 "---java
 "Java言語のハイライト
