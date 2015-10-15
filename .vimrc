@@ -191,6 +191,7 @@ if has('vim_starting')
     NeoBundle 'bronson/vim-trailing-whitespace'
     NeoBundle 'tpope/vim-surround.git'
     NeoBundle 'https://github.com/vim-scripts/yanktmp.vim'
+    NeoBundle 'tpope/vim-commentary'
     NeoBundleCheck
     call neobundle#end()
 endif
