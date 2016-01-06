@@ -140,6 +140,9 @@ set nolinebreak
 set textwidth=0
 " gq コマンド以外では自動改行しない
 set formatoptions=q
+" ビジュアルモードで選択したテキストが、クリップボードに入るよう
+" yankしたテキストが*レジスタにも入るよう
+set clipboard=unnamed,autoselect
 " テキスト挿入中の自動折り返しを日本語に対応させる
 if version >= 600
   set formatoptions+=mM
@@ -148,11 +151,11 @@ endif
 " set tildeop
 " テキストの貼り付けの切り替え
 if version>=508
-  map <F10> :set paste<CR>
-  map <F11> :set nopaste<CR>
-  imap <F10> <C-O>:set paste<CR>
-  imap <F11> <nop>
-  set pastetoggle=<F11>
+  "map <F10> :set paste<CR>
+  "map <F11> :set nopaste<CR>
+  "imap <F10> <C-O>:set paste<CR>
+  "imap <F11> <nop>
+  set pastetoggle=<F10>
 endif
 
 
@@ -177,9 +180,13 @@ set showmatch
 set whichwrap=<,>,h,l,[,]
 
 " 色を変更する
-colorscheme	torte	
+colorscheme	torte
 
 
+" - - - - - - - - - -
+"
+" プラグラインの設定
+"
 "---- neobundle
 if has('vim_starting')
     set runtimepath+=~/.vim/bundle/neobundle.vim/
@@ -198,14 +205,17 @@ endif
 filetype plugin on
 filetype indent on
 
-"omni変換
+" - - - - - - - - - -
+"
+" omni保管の設定
+"
 autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-"tabでomni補完
+"辞書の設定
 autocmd FileType c,h :set dictionary+=~/.vim/dict/c.dict
 autocmd FileType cc,cpp,h :set dictionary+=~/.vim/dict/cpp.dict
 autocmd FileType perl,cgi,pl :set dictionary+=~/.vim/dict/perl.dict
@@ -243,12 +253,18 @@ inoremap <tab> <c-r>=InsertTabWrapper('omni')<cr><c-r>=InsertTabWrapper('keyword
 set completeopt=longest,menu
 
 
-"---vim yank
+" - - - - - - - - - -
+"
+" yankvim
+"
 map <silent> sy :call YanktmpYank()<CR>
 map <silent> sp :call YanktmpPaste_p()<CR>
 map <silent> sP :call YanktmpPaste_P()<CR>
 
-"---java
+" - - - - - - - - - -
+"
+" javaの設定
+"
 "Java言語のハイライト
 let g:java_highlight_all=1
 "デバック文のハイライト
