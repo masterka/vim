@@ -199,6 +199,7 @@ if has('vim_starting')
     NeoBundle 'tpope/vim-surround.git'
     NeoBundle 'https://github.com/vim-scripts/yanktmp.vim'
     NeoBundle 'tpope/vim-commentary'
+    NeoBundle 'nelstrom/vim-visual-star-search'
     NeoBundleCheck
     call neobundle#end()
 endif
