@@ -91,13 +91,6 @@ set showmode
 " ヘルプの最小の高さ
 set helpheight=1
 
-if has("syntax")
-" 色を付ける
-  syntax on
-  " コメント文の配色
-  hi! Comment term=bold ctermfg=brown ctermbg=Grey guifg=brown guibg=grey
-endif
-
 if &t_Co > 2 || has("gui_running")
 " サーチしたパターンをマークする
   set hlsearch
@@ -115,7 +108,8 @@ endif
 " ファイルのタブの幅
 "set tabstop=4
 " ファイルのタブの幅
-set ts=4 sw=4 sts=0
+"set ts=4 sw=4 sts=0
+set ts=2 sw=2 sts=0
 set expandtab
 " 編集中でのタブの幅
 "set softtabstop=4
@@ -142,7 +136,7 @@ set textwidth=0
 set formatoptions=q
 " ビジュアルモードで選択したテキストが、クリップボードに入るよう
 " yankしたテキストが*レジスタにも入るよう
-set clipboard=unnamed,autoselect
+"set clipboard=unnamed,autoselect
 " テキスト挿入中の自動折り返しを日本語に対応させる
 if version >= 600
   set formatoptions+=mM
@@ -182,6 +176,14 @@ set whichwrap=<,>,h,l,[,]
 " 色を変更する
 colorscheme	torte
 
+if has("syntax")
+" 色を付ける
+  syntax on
+  "popupの色を変更
+  hi Pmenu ctermfg=gray ctermbg=darkred guifg=gray guibg=darkred
+  "popupのハイライトの色を変更
+  hi PmenuSel term=bold ctermfg=black ctermbg=gray guifg=black guibg=gray
+endif
 
 " - - - - - - - - - -
 "
@@ -200,6 +202,7 @@ if has('vim_starting')
     NeoBundle 'https://github.com/vim-scripts/yanktmp.vim'
     NeoBundle 'tpope/vim-commentary'
     NeoBundle 'nelstrom/vim-visual-star-search'
+    NeoBundle 'alvan/vim-closetag'
     NeoBundleCheck
     call neobundle#end()
 endif
@@ -274,3 +277,7 @@ let g:java_highlight_debug=1
 let g:java_space_errors=1
 "メソッド宣言文をハイライト
 let g:java_highlight_functions=1
+
+
+" closetag
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.erb,*.php,*.vue'
